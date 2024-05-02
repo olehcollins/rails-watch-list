@@ -1,0 +1,24 @@
+<div class="movies-box">
+  <h1>movies#index</h1>
+<%=link_to 'lists', lists_url, class: 'btn btn-primary'%>
+
+  <%@movies.each do |movie|%>
+    <div class="movie-card">
+      <div class="jumbotron">
+        <h3 class="display-4 title">
+          <%= movie.title %>
+          <%=link_to 'show', movie_url(movie), class: 'btn btn-primary'%>
+        </h3>
+        <p class="lead">
+          address: <i class="overview"><%= movie.overview %></i><br>
+          contact: <i class="poster"><%= movie.poster_url %></i>
+        </p>
+        <br>
+        <div class="rating-box">
+          <div class="average-reviews btn btn-success">Rating: <%= movie.rating %></div>
+        </div>
+      </div>
+    </div>
+  <hr>
+  <%end%>
+</div>

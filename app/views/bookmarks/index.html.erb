@@ -1,0 +1,19 @@
+<%=link_to 'movies', lists_url, class: 'btn btn-primary'%>
+
+  <%@bookmarks.each do |bookmark|%>
+    <div class="bookmark-card">
+      <div class="jumbotron">
+        <h3 class="display-4 title">
+          Movie: <%= bookmark.movie.title %><br>
+          List: <%= bookmark.list.name %>
+        </h3>
+        <p class="lead">
+          comment: <i class="comment"><%= bookmark.comment %></i><br>
+        </p>
+        <br>
+        <%=link_to 'delete', bookmark_url(bookmark), data: { turbo_method: :delete }, class: 'btn btn-danger'%>
+      </div>
+    </div>
+  <hr>
+  <%end%>
+</div>

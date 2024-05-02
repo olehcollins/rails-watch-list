@@ -1,0 +1,11 @@
+<div class="form">
+  <%= simple_form_for @new_list do |f|%>
+    <div class="form-div col-7">
+      <%= f.input :name, class: "form-control", placeholder: 'list name', required: true, prompt: "add a comment" %>
+
+      <div class="form-btns">
+        <%= f.submit "Save", class: "btn btn-primary"%>
+      </div>
+    </div>
+  <% end %>
+</div>

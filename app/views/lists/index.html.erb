@@ -1,0 +1,24 @@
+<div class="list-box">
+  <h1>Lists#index</h1>
+  <%=render 'form'%>
+  <%=link_to 'Home', root_url, class: 'btn btn-success'%>
+  <%=link_to 'Bookmarks', bookmarks_url, class: 'btn btn-success'%>
+  <%@lists.each do |list|%>
+    <div class="list-card">
+      <div class="jumbotron">
+        <h3 class="display-4 title">
+          <%= list.name %>
+          <%=link_to 'show', list_url(list), class: 'btn btn-primary'%>
+        </h3>
+        <p class="lead">
+          Watch Movies
+        </p>
+        <hr class="my-4">
+        <br>
+        <div class="rating-box">
+          <%=link_to 'delete', list_url(list), data: { turbo_method: :delete }, class: 'btn btn-danger'%>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

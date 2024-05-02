@@ -1,0 +1,14 @@
+<h1>Bookmarks#new</h1>
+<p>Find me in app/views/bookmarks/new.html.erb</p>
+<div class="form">
+  <%= simple_form_for [@list, @movie, @bookmark] do |f|%>
+    <div class="form-div col-7">
+      <%= f.input :comment, class: "form-control", placeholder: 'add a comment', required: true, prompt: "add a comment" %>
+
+      <div class="form-btns">
+        <%= f.submit "Save", class: "btn btn-primary"%>
+        <%= link_to 'back', lists_url, class: "btn btn-danger"%>
+      </div>
+    </div>
+  <% end %>
+</div>
