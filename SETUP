@@ -1,0 +1,67 @@
+cd ~/code/olehcollins
+rails new rails-watch-list -d postgresql --skip-action-mailbox -T
+cd rails-watch-list
+We then need to create the postgresql database for this new rails app.
+
+rails db:create
+Let’s set up git, create a repo on GitHub and push our skeleton.
+
+git add .
+git commit -m "rails new"
+gh repo create --public --source=.
+git push origin master
+Let’s import the teacher’s spec to be able to rspec our progress. Note: You will use the rspec command instead of the rake command to run the tests for this challenge.
+
+echo "gem 'rspec-rails', group: [ :test ]" >> Gemfile
+echo "gem 'rails-controller-testing', group: [ :test ]" >> Gemfile
+bundle install
+rails db:migrate
+rails db:test:prepare
+git submodule add https://github.com/lewagon/fullstack-challenges-04-Rails-watch-list-specs.git spec
+git add .
+git commit -m "Prepare rails app with external specs"
+You’ll be able to test your code with:
+
+rails db:migrate RAILS_ENV=test  # If you added a migration
+rspec spec/models                # Launch tests
+Before starting to code, don’t forget to setup your Rails app for Front-end. Like in the lecture, let’s add the gems we’re going to need:
+
+# Gemfile
+# [...]
+gem "bootstrap", "~> 5.2"
+gem "autoprefixer-rails"
+gem "font-awesome-sass", "~> 6.1"
+gem "simple_form"
+gem "sassc-rails" # Uncomment this line
+bundle install
+rails generate simple_form:install --bootstrap
+Then let’s download the Le Wagon’s stylesheets:
+
+rm -rf app/assets/stylesheets
+curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip
+unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets
+Finally let’s import the Boostrap JS library with importmap:
+
+importmap pin bootstrap
+In application.js, add the following lines:
+
+// app/javascript/application.js
+import "bootstrap"
+import "@popperjs/core"
+And then in manifest.js, add the following lines:
+
+// app/assets/config/manifest.js
+//= link popper.js
+//= link bootstrap.min.js
+And finally in config/importmap.rb:
+
+# config/importmap.rb
+
+# replace these lines:
+# pin "bootstrap" # @5.3.2
+# pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
+
+# with this:
+pin "bootstrap", to: "bootstrap.min.js", preload: true
+pin "@popperjs/core", to: "popper.js", preload: true
+Don’t forget to commit and push your work often.
